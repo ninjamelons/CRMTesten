@@ -1,14 +1,6 @@
 ﻿<%@ Page Title="Conclusion" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Conclusion.aspx.cs" Inherits="Testen_Website.Questions.Conclusion" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
-    <style type="text/css"> 
-        .containerBox
-        {
-            background-color: #f1f1f1;
-            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
-            margin-top: 3vh;
-        }
-    </style>
     <form id="conclusion" runat="server">
         <div class="container">
             <div class="col-md-2"></div>

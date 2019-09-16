@@ -86,8 +86,15 @@ namespace Testen_Website.Questions
 
             //TODO - Function to select already checked boxes based on Session storage
             //Value: Question name/identifier
+            //Points value
+            /*
             ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
                               $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q"+q.QuestionId) + "-" + q.Points.GetValue(ai) + "-" + q.PointType}\"/> {answer} </label></div>";
+            */
+            
+            //String value
+            ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
+                              $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q"+q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </label></div>";
         }
 
         //TODO - Currently can only go back to home page

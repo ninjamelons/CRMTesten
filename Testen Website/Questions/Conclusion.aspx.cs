@@ -28,7 +28,7 @@ namespace Testen_Website.Questions
         protected void Page_Load(object sender, EventArgs e)
         {
             float threshold = 0.0f;
-            if (!String.IsNullOrEmpty(Session["points"].ToString()))
+            if (Session["points"] != null)
             {
                 threshold = ReturnThreshold();
             }
@@ -54,9 +54,57 @@ namespace Testen_Website.Questions
             SystemImage.ImageUrl = "~/Content/360logo.png";
 
             SystemDesc.InnerHtml =
-                "<p>360 Business Tool er en CRM løsning, der indeholder alle de funktioner, en virksomhed har brug for. </p>" +
+                "<p><a href=\"https://www.360businesstool.com/ \">360 Business Tool</a> er en CRM løsning, der indeholder alle de funktioner, en virksomhed har brug for. </p>" +
                 "<p>CRM, time/sag, tidsregistrering, tilbudsgivning, budgettering, fakturering, marketing, nyhedsbreve og meget mere. </p>" +
                 "<p>Modulopbygget så du kan starte simpelt og slå flere moduler til, efterhånden som din forretning vokser </p>";
+        }
+
+        private string ReturnRecommendation(int count)
+        {
+            var recommendation = "";
+
+            Dictionary<string, int?> dictionary = ReadSessionStrings(count);
+            
+            //TODO - Kinda hard coded answers/questions - Cant do yet
+
+            return recommendation;
+        }
+
+        private Dictionary<string, int?> ReadSessionStrings(int count)
+        {
+            //Structure: Session["points"] = "'q'+QuestiondId-PointString, ..."
+            string pointsString = (string) Session["points"];
+            string[] pointsArray = pointsString.Split(',');
+
+            Dictionary<string, int?> pointDict = new Dictionary<string, int?>();
+
+            foreach (string pointS in pointsArray)
+            {
+                #region Split String
+
+                //Array with details of the questionId, number of points, & Point type
+                var pointDet = pointS.Split('-');
+
+                //Question ID = "q102" - Converted to int - 102
+                int qId = 0;
+                Int32.TryParse(pointDet.GetValue(0).ToString().Substring(1), out qId);
+
+                //Points = "360"
+                string pointValue = pointDet.GetValue(1).ToString();
+
+                #endregion
+
+                if (pointDict[pointValue] != null)
+                {
+                    pointDict[pointValue] += 1;
+                }
+                else
+                {
+                    pointDict.Add(pointValue, 0);
+                }
+            }
+
+            return pointDict;
         }
 
         //Returns the Threshold used in determining the page layout

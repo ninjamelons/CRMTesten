@@ -11,10 +11,6 @@ namespace Testen_Website
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(Session["points"].ToString()))
-            {
-
-            }
         }
     }
 }
