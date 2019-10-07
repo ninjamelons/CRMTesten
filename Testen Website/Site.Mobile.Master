@@ -9,7 +9,6 @@
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
-    <form id="form1" runat="server">
     <div>
         <h1>Mobile Master Page</h1>
         <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
@@ -18,6 +17,5 @@
         </section>
         <friendlyUrls:ViewSwitcher runat="server" />
     </div>
-    </form>
 </body>
 </html>

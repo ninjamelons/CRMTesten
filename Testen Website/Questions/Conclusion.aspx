@@ -1,25 +1,36 @@
 ﻿<%@ Page Title="Conclusion" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Conclusion.aspx.cs" Inherits="Testen_Website.Questions.Conclusion" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
-    <form id="conclusion" runat="server">
-        <div class="container">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 text-center containerBox">
-                <div class="row text-center">
-                    <h1 ID="SystemTitle" runat="server"></h1>
-                    <div>
-                        <asp:Image ID="SystemImage" runat="server" CssClass="img-rounded" style="margin-bottom: 1vh"/>
+    <div class="container body-content">
+        <form id="conclusion" method="post" runat="server">
+            <div class="container">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 text-center containerBox">
+                    <div class="row text-center">
+                        <h1 ID="SystemTitle" runat="server"></h1>
+                        <div>
+                            <asp:Image ID="SystemImage" runat="server" CssClass="img-rounded" style="margin-bottom: 1vh"/>
+                        </div>
                     </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-2"></div>
-                    <div ID="SystemDesc" runat="server" class="col-md-8 text-muted">
+                    <div class="row text-center">
+                        <div class="col-md-2"></div>
+                        <div ID="SystemDesc" runat="server" class="col-md-8 text-muted">
 
+                        </div>
+                        <div class="col-md-2"></div>
                     </div>
-                    <div class="col-md-2"></div>
+                    <hr />
+                    <div class="row text-center">
+                        <p>We can send more about the CRM tool to an email</p>
+                        <label>
+                            E-mail Address
+                            <input type="email" name="email"/>
+                        </label>
+                        <asp:Button ID="EmailForm" runat="server" Text="Send" OnClick="EmailForm_OnClick"/>
+                    </div>
                 </div>
+                <div class="col-md-2"></div>
             </div>
-            <div class="col-md-2"></div>
-        </div>
-    </form>
+        </form>
+    </div>
 </asp:Content>

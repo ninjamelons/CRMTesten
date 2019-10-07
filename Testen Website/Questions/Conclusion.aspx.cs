@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Razor.Generator;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using Testen_Website.Models;
 
 namespace Testen_Website.Questions
@@ -27,6 +31,17 @@ namespace Testen_Website.Questions
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["conclusion"] = true;
+
+            var rec = "";
+
+            if (Session["points"] != null)
+            {
+                
+                rec = ReturnRecommendation();
+            }
+
+            /*
             float threshold = 0.0f;
             if (Session["points"] != null)
             {
@@ -46,6 +61,18 @@ namespace Testen_Website.Questions
             {
                 //TODO - Recommend big system?
             }
+            */
+
+            if (rec.Equals("360"))
+            {
+                
+            } else if (rec.Equals("small"))
+            {
+
+            } else if (rec.Equals("big"))
+            {
+
+            }
 
             //Place holder text & possible structure
             SystemTitle.InnerText = "360 Business Tool";
@@ -59,15 +86,63 @@ namespace Testen_Website.Questions
                 "<p>Modulopbygget så du kan starte simpelt og slå flere moduler til, efterhånden som din forretning vokser </p>";
         }
 
-        private string ReturnRecommendation(int count)
+        private string ReturnRecommendation()
         {
             var recommendation = "";
 
-            Dictionary<string, int?> dictionary = ReadSessionStrings(count);
-            
-            //TODO - Kinda hard coded answers/questions - Cant do yet
+            string pointString = (string) Session["points"];
+            //202 - max3,max10,max30,max100,max1000,max1000+
+            //205 - no
+
+            if (pointString.Contains("no"))
+            {
+                if (pointString.Contains("max3,") || pointString.Contains("max10,"))
+                {
+                    recommendation = "small";
+                }
+                else
+                {
+                    recommendation = "big";
+                }
+            }
+            else
+            {
+                recommendation = "360";
+            }
 
             return recommendation;
+        }
+
+        protected void EmailForm_OnClick(object sender, EventArgs e)
+        {
+            if (!Request.Form["email"].IsEmpty())
+            {
+                //TODO - Save the email somewhere
+
+                SmtpClient smtpClient = new SmtpClient("mail.MyWebsiteDomainName.com", 25);
+
+                smtpClient.Credentials = new System.Net.NetworkCredential("info@MyWebsiteDomainName.com", "password");
+                smtpClient.UseDefaultCredentials = true;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+
+                mail.Subject = "CRM Test Results";
+                mail.Body = "";
+
+                string htmlBody = HtmlEmailFormatter.GetHtmlFile(ReturnRecommendation());
+
+                ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+                // Add the alternate body to the message.
+      
+                AlternateView alternate = AlternateView.CreateAlternateViewFromString(htmlBody, mimeType);
+                mail.AlternateViews.Add(alternate);
+
+                mail.From = new MailAddress("info@MyWebsiteDomainName", "CRM Test");
+                mail.To.Add(new MailAddress(Request.Form["email"]));
+
+                smtpClient.Send(mail);
+            }
         }
 
         private Dictionary<string, int?> ReadSessionStrings(int count)

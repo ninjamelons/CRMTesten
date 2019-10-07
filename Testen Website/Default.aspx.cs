@@ -13,6 +13,7 @@ namespace Testen_Website
         {
             //Reset points
             Session["points"] = "";
+            Session["conclusion"] = false;
         }
     }
 }

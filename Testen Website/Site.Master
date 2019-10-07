@@ -14,23 +14,86 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css"/>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    
+    <script type="text/javascript" src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.sortable.js"></script>
+    <link href="Content/Site.css" rel="stylesheet" type="text/css"/>
+
     <style>
-        .containerBox
-        {
-            background-color: #f1f1f1;
-            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
-            margin-top: 3vh;
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
+        @import "Content/Site.css";
+
+        .contPadding { padding: 2em 5em; }
+
+        .priorityPad { height: 2.5em; }
+
+        .displayFlex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+        }
+        
+        /*Montserrat Font styling and some other minor adjustments*/
+        .topBackground {
+            background-color: #030416;
         }
 
-        .contPadding
-        {
-            padding: 2em 5em;
+        .body {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 500;
         }
+
+        .body h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+        }
+
+        .body h1 { font-size: 48px; } .body h2 { font-size: 32px; } .body h3 { font-size: 26px; }
+
+        .blackBack {
+            color: white;
+        }
+
+        .body .subheading {
+            margin-bottom: 2%;
+            opacity: 0.6;
+        }
+
+        .navHoverable:hover {
+            color: #6a6c7c
+        }
+
+        .navHoverable {
+            color: white;
+        }
+
+
+        /*Home page styling of content like margins/padding*/
+        .home_title {
+            margin-top: 18%;
+            margin-left: 8%;
+        }
+        .home_description {
+            margin-bottom: 25%;
+        }
+        .home_phrase {
+            margin-bottom: 8%;
+        }
+        .home_accordion {
+            margin-left: 5%;
+            margin-bottom: 8%;
+        }
+        .home_need {
+            margin: 5%;
+        }
+        .home_example {
+            margin: 8% 8% 15% 8%;
+        }
+
     </style>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar topBackground blackBack navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,43 +101,73 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" runat="server" href="~/">CRM Test</a>
+            <a class="navbar-brand" runat="server" href="~/" style="color: #999cb5; font-weight: bold;">CRM Test</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a runat="server" href="~/">Home</a>
+                    <a class="nav-tabs navHoverable" runat="server" href="~/">Home</a>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-<div class="container body-content">
+<div class="body">
     <asp:ContentPlaceHolder ID="MainContent" runat="server">
     </asp:ContentPlaceHolder>
-    <hr/>
-    <footer>
-        <p>&copy; <%: DateTime.Now.Year %> - CRM Test</p>
-    </footer>
 </div>
 </body>
 </html>
-
 <script>
-    $(function () {
-        $("#sortable").sortable({
-            update: function (event, ui) {
-                var neworder = [];
-                $("#sortable").find(".ui-state-default").each(function () {
-                    var item = $(this).text();
-                    //alert(item);
-                    neworder.push(item)
-                });
-                alert(JSON.stringify(neworder));
+    $('.sortable').sortable();
 
-                //here, you could pass this re-ordered items to a webmethod and save to the database using AJAX.
+    var form = document.getElementById('test');
+    if (form != null) {
+        form.onsubmit = validateForm;
+    }
+
+    function validateForm() {
+        var isValid = [],
+            form = this;
+
+        var exists = true;
+
+        var e = 0;
+
+        while (exists) {
+            if (form.elements['q' + e] != null) {
+
+                var els = form.elements['q' + e];
+
+                isValid.push(false);
+                for (var i = 0; i < els.length; i++) {
+                    if (els[i].type !== "hidden") {
+                        if (els[i].checked) {
+                            isValid.pop();
+                            isValid.push(true);
+                        }
+                    } else {
+                        isValid.pop();
+                        isValid.push(true);
+                    }
+                }
+            } else {
+                exists = false;
             }
-        });
-        $("#sortable").disableSelection();
-    });
-</script> 
+
+            e++;
+        }
+
+        var retTrue = false;
+
+        if (isValid.toString().lastIndexOf("false") === -1) {
+            retTrue = true;
+        }
+
+        console.log(retTrue);
+        if (!retTrue) {
+            window.alert("alle spørgsmål skal besvares");
+        }
+        return retTrue;
+    }
+</script>

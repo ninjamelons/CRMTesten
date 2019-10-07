@@ -22,6 +22,21 @@ namespace Testen_Website.Models
                 throw new Exception("Points array length different from Answers array length");
             }
         }
+        
+        //If points are different depending on the answer
+        public Question(int qId, string question, string inputType, Array answers, Array points)
+        {
+            QuestionId = qId;
+            QuestionValue = question;
+            InputType = inputType;
+            Answers = answers;
+            Points = points;
+
+            if (Points.Length != Answers.Length)
+            {
+                throw new Exception("Points array length different from Answers array length");
+            }
+        }
 
         public int QuestionId { get; set; }
         public string QuestionValue { get; set; }

@@ -133,6 +133,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\customer-relationship-management.png" />
+    <Content Include="Content\HtmlEmail.html" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -155,6 +157,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.sortable.js" />
+    <Content Include="Scripts\jquery.sortable.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -219,6 +223,7 @@
     <Compile Include="Questions\Conclusion.aspx.designer.cs">
       <DependentUpon>Conclusion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Questions\HtmlEmailFormatter.cs" />
     <Compile Include="Questions\QuestionsContainer.cs" />
     <Compile Include="Questions\Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>

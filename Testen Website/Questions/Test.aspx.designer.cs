@@ -49,6 +49,15 @@ namespace Testen_Website.Questions {
         protected global::System.Web.UI.WebControls.Button buttonBack;
         
         /// <summary>
+        /// pageNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pageNumber;
+        
+        /// <summary>
         /// buttonNext control.
         /// </summary>
         /// <remarks>

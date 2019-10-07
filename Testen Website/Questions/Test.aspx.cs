@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HtmlAgilityPack;
 using Testen_Website.Models;
 
 namespace Testen_Website.Questions
@@ -18,13 +19,19 @@ namespace Testen_Website.Questions
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((bool)Session["conclusion"])
+                Response.Redirect("~/Default.aspx");
+
             if (!IsPostBack)
             {
-                WriteQuestionnaire(qCont.GetQuestionsAnalysis, FitAnalysis);
+                WriteQuestionnaire(qCont.GetQuestionsAnalysisString, FitAnalysis);
+                pageNumber.InnerText = "Spørgsmål 1-6..12";
+                /*
                 SwitchTitle(
-                    () => buttonBack.Visible = true,
-                    () => buttonBack.Visible = false,
+                    () => pageNumber.InnerText = "Spørgsmål 1-6..12",//buttonBack.Visible = true,
+                    () => pageNumber.InnerText = "Spørgsmål 7-12..12",//buttonBack.Visible = false,
                     Session["currentPage"]);
+                    */
             }
         }
 
@@ -43,6 +50,10 @@ namespace Testen_Website.Questions
 
                 questionsContainer.InnerHtml += $"<div id=\"question{q.QuestionId}\" class=\"row\">" +
                                                 $"   <h4>{q.QuestionValue}</h4>";
+                if (q.InputType.Equals("priority"))
+                {
+                    questionsContainer.InnerHtml += $"<ol class=\"sortable\">";
+                }
 
                 for (int j = 0; j < q.Answers.Length; j++)
                 {
@@ -52,12 +63,19 @@ namespace Testen_Website.Questions
 
                 if (i != analysis.Count - 1)
                 {
-                    questionsContainer.InnerHtml += "<hr style=\"border: 0;height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\">";
+                    questionsContainer.InnerHtml +=
+                        "<hr style=\"border: 0;height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\">";
                 }
                 else
                 {
                     questionsContainer.InnerHtml += "<br>";
                 }
+
+                if (q.InputType.Equals("priority"))
+                {
+                    questionsContainer.InnerHtml += $"</ol>";
+                }
+
                 questionsContainer.InnerHtml += "</div>";
             }
         }
@@ -70,28 +88,35 @@ namespace Testen_Website.Questions
         private void attachAnswersBoxes(int qi, int ai, Question q, string answer,
             System.Web.UI.HtmlControls.HtmlGenericControl ctrl)
         {
-            string contClass = "";
             switch (q.InputType)
             {
                 case "radio":
-                    contClass = "checkbox";
+                    insertAnswer(qi, ai, q, answer, ctrl, "radio");
                     break;
                 case "checkbox":
-                    contClass = "radio";
+                    insertAnswer(qi, ai, q, answer, ctrl, "checkbox");
+                    break;
+                case "priority":
+                    ctrl.InnerHtml += $"<li><div class=\"priorityPad\"><input name=\"{"q" + qi}\" type=\"hidden\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </div></li>";
                     break;
                 default:
-                    contClass = "checkbox";
+                    insertAnswer(qi, ai, q, answer, ctrl, "checkBox");
                     break;
             }
 
             //TODO - Function to select already checked boxes based on Session storage
+        }
+
+        private void insertAnswer(int qi, int ai, Question q, string answer,
+            System.Web.UI.HtmlControls.HtmlGenericControl ctrl, string contClass)
+        {
             //Value: Question name/identifier
             //Points value
             /*
             ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
-                              $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q"+q.QuestionId) + "-" + q.Points.GetValue(ai) + "-" + q.PointType}\"/> {answer} </label></div>";
+                              $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai) + "-" + q.PointType}\"/> {answer} </label></div>";
             */
-            
+
             //String value
             ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
                               $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q"+q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </label></div>";
@@ -104,19 +129,20 @@ namespace Testen_Website.Questions
 
             SwitchTitle(
                 () => Response.Redirect("~"),
-                () => WriteQuestionnaire(qCont.GetQuestionsAnalysis, FitAnalysis),
+                () => WriteQuestionnaire(qCont.GetQuestionsAnalysisString, FitAnalysis),
                 Session["currentPage"].ToString());
         }
 
         protected void ButtonNext(object sender, EventArgs e)
         {
-            if (!Session["points"].ToString().Contains(ProcessPoints()))
-            {
-                Session["points"] += ProcessPoints();
-            }
+            Session["points"] += ProcessPoints();
 
             SwitchTitle(
-                () => WriteQuestionnaire(qCont.GetQuestionsQualifications, QualAnalysis),
+                () =>
+                {
+                    WriteQuestionnaire(qCont.GetQuestionsQualificationsString, QualAnalysis);
+                    pageNumber.InnerText = "Spørgsmål 7-12..12";
+                },
                 () => Response.Redirect("/Questions/Conclusion"),
                 Session["currentPage"].ToString());
         }
@@ -161,8 +187,8 @@ namespace Testen_Website.Questions
             //If the Session already has the exact same selections then do nothing
             if (!Session["points"].ToString().Contains(pointStr))
             {
-
             }
+
             //Home page should clear session points
         }
 
