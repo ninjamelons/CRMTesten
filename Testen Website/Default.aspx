@@ -5,12 +5,18 @@
         <div class="container">
             <div class="row home_title">
                 <div class="col-lg-10 col-md-12">
-                    <h1>title</h1>
+                    <h1>CRM Testen</h1>
                 </div>
             </div>
             <div class="row home_description">
                 <div class="col-lg-7 col-lg-offset-3 col-md-10 col-md-offset-2">
-                    <p class="subheading">test description</p>
+                    <p class="subheading">
+                        Du kan bruge CRM Testen til at få nogle valgmuligheder til CRM-systemer baseret på jeres egen situation i virksomheden.
+                        Når beslutningen om et nyt CRM-system er taget, så begynder udfordringerne med, hvilket system skal vi vælge.
+                    </p>
+                    <p class="subheading">
+                        Besvar spørgsmålene og se hvilket CRM-system, der passer til jeres virksomhed.
+                    </p>
                     <div class="row">
                         <div class="col-lg-12">
                             <a href="Questions/Test.aspx" class="btn btn-primary">Start Test</a>
