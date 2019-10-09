@@ -39,7 +39,18 @@ textarea {
 
 .contPadding { padding: 2em 5em; }
 
+.sortable {
+    padding: 0em;
+}
+
 .priorityPad { height: 2.5em; }
+
+.priorityBorder {
+    border: 1px solid;
+    line-height: 2.5em;
+    padding-left: 1em;
+    margin: 0em 3em;
+}
 
 .displayFlex {
     display: flex;

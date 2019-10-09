@@ -97,7 +97,7 @@ namespace Testen_Website.Questions
                     insertAnswer(qi, ai, q, answer, ctrl, "checkbox");
                     break;
                 case "priority":
-                    ctrl.InnerHtml += $"<li><div class=\"priorityPad\"><input name=\"{"q" + qi}\" type=\"hidden\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </div></li>";
+                    ctrl.InnerHtml += $"<li class=\"priorityBorder\" style=\"cursor: pointer\"><div class=\"priorityPad\"><input name=\"{"q" + qi}\" type=\"hidden\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </div></li>";
                     break;
                 default:
                     insertAnswer(qi, ai, q, answer, ctrl, "checkBox");

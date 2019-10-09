@@ -109,7 +109,17 @@ namespace Testen_Website.Questions
             }
             else
             {
-                recommendation = "360";
+                if (pointString.Contains("max3,"))
+                {
+                    recommendation = "small";
+                } else if (pointString.Contains("max1000,") || pointString.Contains("max1000+"))
+                {
+                    recommendation = "big";
+                }
+                else
+                {
+                    recommendation = "360";
+                }
             }
 
             return recommendation;
