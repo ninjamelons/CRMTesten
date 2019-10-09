@@ -63,19 +63,21 @@ namespace Testen_Website.Questions
             }
             */
 
+            var title = "";
+
             if (rec.Equals("360"))
             {
-                
+                title = "360";
             } else if (rec.Equals("small"))
             {
-
+                title = "small";
             } else if (rec.Equals("big"))
             {
-
+                title = "big";
             }
 
             //Place holder text & possible structure
-            SystemTitle.InnerText = "360 Business Tool";
+            SystemTitle.InnerText = title;
 
             SystemImage.AlternateText = "360 Business Tool";
             SystemImage.ImageUrl = "~/Content/360logo.png";
