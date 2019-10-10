@@ -39,6 +39,8 @@ textarea {
 
 .contPadding { padding: 2em 5em; }
 
+.contMargin { margin-top: 16vh; }
+
 .sortable {
     padding: 0em;
 }
@@ -50,13 +52,6 @@ textarea {
     line-height: 2.5em;
     padding-left: 1em;
     margin: 0em 3em;
-}
-
-.displayFlex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
 }
         
 /*Montserrat Font styling and some other minor adjustments*/
@@ -96,22 +91,8 @@ textarea {
 
 /*Home page styling of content like margins/padding*/
 .home_title {
-    margin-top: 18%;
     margin-left: 8%;
 }
 .home_description {
     margin-bottom: 25%;
-}
-.home_phrase {
-    margin-bottom: 8%;
-}
-.home_accordion {
-    margin-left: 5%;
-    margin-bottom: 8%;
-}
-.home_need {
-    margin: 5%;
-}
-.home_example {
-    margin: 8% 8% 15% 8%;
 }

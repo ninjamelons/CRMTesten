@@ -19,15 +19,6 @@
                         </div>
                         <div class="col-md-2"></div>
                     </div>
-                    <hr />
-                    <div class="row text-center">
-                        <p>We can send more about the CRM tool to an email</p>
-                        <label>
-                            E-mail Address
-                            <input type="email" name="email"/>
-                        </label>
-                        <asp:Button ID="EmailForm" runat="server" Text="Send" OnClick="EmailForm_OnClick"/>
-                    </div>
                 </div>
                 <div class="col-md-2"></div>
             </div>
