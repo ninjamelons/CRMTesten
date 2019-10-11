@@ -14,8 +14,11 @@ namespace Testen_Website.Questions
 {
     public partial class Test : System.Web.UI.Page
     {
+        //Page title
         private const string FitAnalysis = "CRM Testen - side 1 af 2";
         private const string QualAnalysis = "CRM Testen - side 2 af 2";
+
+        //Questions source - TODO - Can be moved to a database
         QuestionsContainer qCont = new QuestionsContainer();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +31,8 @@ namespace Testen_Website.Questions
                 WriteQuestionnaire(qCont.GetQuestionsAnalysisRep, FitAnalysis);
             }
         }
-
+        
+        //Set questions and all other properties
         private void WriteQuestionnaire(Func<List<QuestionRep>> quests, string title)
         {
             List<QuestionRep> analysis = quests();
@@ -40,13 +44,29 @@ namespace Testen_Website.Questions
             QuestionsList.DataBind();
         }
 
+        //Process points and redirect to the next page
         protected void ButtonNext(object sender, EventArgs e)
         {
-            if (Session["points"].Equals(""))
-                Session["points"] += ProcessPoints();
-            else
-                Session["points"] += "," + ProcessPoints();
+            //Get all answered questions' values
+            var allKeys = Request.Form.AllKeys;
+            var list = new ArrayList();
 
+            foreach (var key in allKeys)
+            {
+                if (key.Contains("quest"))
+                    list.Add(Request.Form[key]);
+            }
+
+            //Convert list of answered values to a single string
+            var processedPoints = string.Join(",", list.ToArray());
+
+            //Add all answers to Session points
+            if (Session["points"].Equals(""))
+                Session["points"] += processedPoints;
+            else
+                Session["points"] += "," + processedPoints;
+
+            //Redirect
             SwitchTitle(
                 () =>
                 {
@@ -57,20 +77,7 @@ namespace Testen_Website.Questions
                 Session["currentPage"].ToString());
         }
 
-        private string ProcessPoints()
-        {
-            var allKeys = Request.Form.AllKeys;
-            var list = new ArrayList();
-
-            foreach (var key in allKeys)
-            {
-                if (key.Contains("quest"))
-                    list.Add(Request.Form[key]);
-            }
-
-            return string.Join(",", list.ToArray());
-        }
-
+        //switch for page checking with delegates
         private void SwitchTitle(Action fit, Action qual, object value)
         {
             if (value != null)

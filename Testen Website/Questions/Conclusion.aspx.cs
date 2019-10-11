@@ -21,11 +21,11 @@ namespace Testen_Website.Questions
 
             var rec = "";
 
-            if (Session["points"] != null)
-            {
-                
-                rec = ReturnRecommendation();
-            }
+            //If points are null then test has not been gone through
+            if (Session["points"] == null || Session["points"].Equals(""))
+                Response.Redirect("~/Default.aspx");
+
+            rec = ReturnRecommendation();
 
             var title = "";
             var description = "";
@@ -81,6 +81,7 @@ namespace Testen_Website.Questions
             SystemDesc.Controls.Add(new LiteralControl(description));
         }
 
+        //Checks if Session["points"] contains specific answers
         private string ReturnRecommendation()
         {
             var recommendation = "";
