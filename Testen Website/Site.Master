@@ -63,21 +63,15 @@
 
         var exists = true;
 
-        var e = 0;
+        var e = 1;
 
         while (exists) {
-            if (form.elements['q' + e] != null) {
-
-                var els = form.elements['q' + e];
-
+            if (form.elements['quest' + e] != null) {
+                var els = form.elements['quest' + e];
                 isValid.push(false);
+
                 for (var i = 0; i < els.length; i++) {
-                    if (els[i].type !== "hidden") {
-                        if (els[i].checked) {
-                            isValid.pop();
-                            isValid.push(true);
-                        }
-                    } else {
+                    if (els[i].checked) {
                         isValid.pop();
                         isValid.push(true);
                     }

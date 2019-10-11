@@ -212,8 +212,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\QuestionRep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Question.cs" />
     <Compile Include="Questions\Conclusion.aspx.cs">
       <DependentUpon>Conclusion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

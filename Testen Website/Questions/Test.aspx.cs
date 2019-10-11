@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,8 +14,8 @@ namespace Testen_Website.Questions
 {
     public partial class Test : System.Web.UI.Page
     {
-        private const string FitAnalysis = "Fit Analysis";
-        private const string QualAnalysis = "Qualifications Analysis";
+        private const string FitAnalysis = "CRM Testen - side 1 af 2";
+        private const string QualAnalysis = "CRM Testen - side 2 af 2";
         QuestionsContainer qCont = new QuestionsContainer();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -24,124 +25,33 @@ namespace Testen_Website.Questions
 
             if (!IsPostBack)
             {
-                WriteQuestionnaire(qCont.GetQuestionsAnalysisString, FitAnalysis);
-                pageNumber.InnerText = "Spørgsmål 1-6..12";
-                /*
-                SwitchTitle(
-                    () => pageNumber.InnerText = "Spørgsmål 1-6..12",//buttonBack.Visible = true,
-                    () => pageNumber.InnerText = "Spørgsmål 7-12..12",//buttonBack.Visible = false,
-                    Session["currentPage"]);
-                    */
+                WriteQuestionnaire(qCont.GetQuestionsAnalysisRep, FitAnalysis);
             }
         }
 
-        private void WriteQuestionnaire(Func<List<Question>> quests, string title)
+        private void WriteQuestionnaire(Func<List<QuestionRep>> quests, string title)
         {
-            List<Question> analysis = quests();
+            List<QuestionRep> analysis = quests();
 
             questionsH.InnerText = title;
             Session["currentPage"] = title;
-            questionsContainer.InnerHtml = "";
 
-            for (int i = 0; i < analysis.Count; i++)
-            {
-                //Set template div for the question
-                Question q = (Question) analysis[i];
-
-                questionsContainer.InnerHtml += $"<div id=\"question{q.QuestionId}\" class=\"row\">" +
-                                                $"   <h4>{q.QuestionValue}</h4>";
-                if (q.InputType.Equals("priority"))
-                {
-                    questionsContainer.InnerHtml += $"<ol class=\"sortable\">";
-                }
-
-                for (int j = 0; j < q.Answers.Length; j++)
-                {
-                    string answer = (string) q.Answers.GetValue(j);
-                    attachAnswersBoxes(i, j, q, answer, questionsContainer);
-                }
-
-                if (i != analysis.Count - 1)
-                {
-                    questionsContainer.InnerHtml +=
-                        "<hr style=\"border: 0;height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\">";
-                }
-                else
-                {
-                    questionsContainer.InnerHtml += "<br>";
-                }
-
-                if (q.InputType.Equals("priority"))
-                {
-                    questionsContainer.InnerHtml += $"</ol>";
-                }
-
-                questionsContainer.InnerHtml += "</div>";
-            }
-        }
-
-        //qi is the question index in the question collection
-        //ai is the answer index in the answer array
-        //q is the question object
-        //answer is the current answer in the for loop
-        //ctrl is the HTML container all of the questions will be held in
-        private void attachAnswersBoxes(int qi, int ai, Question q, string answer,
-            System.Web.UI.HtmlControls.HtmlGenericControl ctrl)
-        {
-            switch (q.InputType)
-            {
-                case "radio":
-                    insertAnswer(qi, ai, q, answer, ctrl, "radio");
-                    break;
-                case "checkbox":
-                    insertAnswer(qi, ai, q, answer, ctrl, "checkbox");
-                    break;
-                case "priority":
-                    ctrl.InnerHtml += $"<li class=\"priorityBorder\" style=\"cursor: pointer\"><div class=\"priorityPad\"><input name=\"{"q" + qi}\" type=\"hidden\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </div></li>";
-                    break;
-                default:
-                    insertAnswer(qi, ai, q, answer, ctrl, "checkBox");
-                    break;
-            }
-
-            //TODO - Function to select already checked boxes based on Session storage
-        }
-
-        private void insertAnswer(int qi, int ai, Question q, string answer,
-            System.Web.UI.HtmlControls.HtmlGenericControl ctrl, string contClass)
-        {
-            //Value: Question name/identifier
-            //Points value
-            /*
-            ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
-                              $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q" + q.QuestionId) + "-" + q.Points.GetValue(ai) + "-" + q.PointType}\"/> {answer} </label></div>";
-            */
-
-            //String value
-            ctrl.InnerHtml += $"<div class=\"{contClass}\">" +
-                              $"<label><input name=\"{"q" + qi}\" type=\"{q.InputType}\" value=\"{("q"+q.QuestionId) + "-" + q.Points.GetValue(ai)}\"/> {answer} </label></div>";
-        }
-
-        //TODO - Currently can only go back to home page
-        protected void ButtonBack(object sender, EventArgs e)
-        {
-            ProcessPointsOnBack();
-
-            SwitchTitle(
-                () => Response.Redirect("~"),
-                () => WriteQuestionnaire(qCont.GetQuestionsAnalysisString, FitAnalysis),
-                Session["currentPage"].ToString());
+            QuestionsList.DataSource = analysis;
+            QuestionsList.DataBind();
         }
 
         protected void ButtonNext(object sender, EventArgs e)
         {
-            Session["points"] += ProcessPoints();
+            if (Session["points"].Equals(""))
+                Session["points"] += ProcessPoints();
+            else
+                Session["points"] += "," + ProcessPoints();
 
             SwitchTitle(
                 () =>
                 {
-                    WriteQuestionnaire(qCont.GetQuestionsQualificationsString, QualAnalysis);
-                    pageNumber.InnerText = "Spørgsmål 7-12..12";
+                    WriteQuestionnaire(qCont.GetQuestionsQualificationsRep, QualAnalysis);
+                    buttonNext.Text = "Vis resultat";
                 },
                 () => Response.Redirect("/Questions/Conclusion"),
                 Session["currentPage"].ToString());
@@ -149,47 +59,16 @@ namespace Testen_Website.Questions
 
         private string ProcessPoints()
         {
-            bool getQ = true;
-            string points = "";
+            var allKeys = Request.Form.AllKeys;
+            var list = new ArrayList();
 
-            for (int i = 0; getQ; i++)
+            foreach (var key in allKeys)
             {
-                if (Request.Form["q" + i] != null)
-                {
-                    if (!points.Equals(""))
-                    {
-                        points += "," + Request.Form["q" + i];
-                    }
-                    else
-                    {
-                        points = Request.Form["q" + i];
-                    }
-                }
-                else
-                {
-                    getQ = false;
-                }
+                if (key.Contains("quest"))
+                    list.Add(Request.Form[key]);
             }
 
-            return points;
-        }
-
-        //TODO - Add/Subtract points from session when pressing back
-        private void ProcessPointsOnBack()
-        {
-            return;
-
-            string pointStr = ProcessPoints();
-
-            if (String.IsNullOrEmpty(pointStr))
-                return;
-
-            //If the Session already has the exact same selections then do nothing
-            if (!Session["points"].ToString().Contains(pointStr))
-            {
-            }
-
-            //Home page should clear session points
+            return string.Join(",", list.ToArray());
         }
 
         private void SwitchTitle(Action fit, Action qual, object value)

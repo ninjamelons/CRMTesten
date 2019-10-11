@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="Test" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Test.aspx.cs" Inherits="Testen_Website.Questions.Test" %>
-<%@ Import Namespace="System.Web.Services" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div class="container body-content">
@@ -10,19 +9,35 @@
                     <div>
                         <h2 id="questionsH" class="center-block" runat="server"></h2>
                         <div id="questionsContainer" class="form-group" runat="server">
+                        <asp:Repeater ID="QuestionsList" runat="server" ItemType="Testen_Website.Models.QuestionRep">
+                            <ItemTemplate>
+                                <div id="question<%# Item.ID %>" class="row">
+                                    <h4><%# Item.Value %></h4>
+                                    <asp:Repeater DataSource="<%#Item.Answers%>" runat="server" ItemType="Testen_Website.Models.Answer">
+                                        <ItemTemplate>
+                                            <%// Parent DataItems light up red but it works, it is an intellisense issue %>
+                                            <div class="inputPadding">
+                                                <label>
+                                                    <input name="quest<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "ID") %>"
+                                                           type="<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "InputType") %>"
+                                                           value="<%#Item.Value %>"/>
+                                                    <%#Item.Label %>
+                                                </label>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </ItemTemplate>
+                            <SeparatorTemplate>
+                                <hr style="border: 0;height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))">
+                            </SeparatorTemplate>
+                        </asp:Repeater>
                         </div>
                     </div>
+                    <br />
                     <div>
-                        <!--
-                        <div class="col-sm-6 text-center">
-                            <asp:Button ID="buttonBack" runat="server" OnClick="ButtonBack" Text="Back" CssClass="btn btn-default"/>
-                        </div>
-                        -->
-                        <div class="col-sm-2 text-center">
-                            <span id="pageNumber" runat="server"></span>
-                        </div>
                         <div class="col-sm-2 col-sm-offset-8 text-center">
-                            <asp:Button ID="buttonNext" runat="server" OnClick="ButtonNext" Text="Next" CssClass="btn btn-primary"/>
+                            <asp:Button ID="buttonNext" runat="server" OnClick="ButtonNext" Text="Næste side" CssClass="btn btn-primary"/>
                         </div>
                     </div>
                 </div>

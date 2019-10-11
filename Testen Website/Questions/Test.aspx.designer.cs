@@ -40,22 +40,13 @@ namespace Testen_Website.Questions {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl questionsContainer;
         
         /// <summary>
-        /// buttonBack control.
+        /// QuestionsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonBack;
-        
-        /// <summary>
-        /// pageNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pageNumber;
+        protected global::System.Web.UI.WebControls.Repeater QuestionsList;
         
         /// <summary>
         /// buttonNext control.

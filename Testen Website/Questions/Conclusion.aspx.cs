@@ -44,7 +44,7 @@ namespace Testen_Website.Questions
                     "<p>Modulopbygget så du kan starte simpelt og slå flere moduler til, efterhånden som din forretning vokser. </p>" +
                     "<br >" +
                     "<p>Tak for at du gjorde brug af CRM Testen.</p>" +
-                    "<p>Hvis du har spørgsmål, er du velkommen til at <a href\"https://www.360businesstool.com/kontakt/ \">indtaste dine kontaktinformationer her</a>," +
+                    "<p>Hvis du har spørgsmål, er du velkommen til at <a href=\"https://www.360businesstool.com/kontakt/ \">indtaste dine kontaktinformationer her</a>," +
                     "så vil du blive kontaktet af en CRM specialist hurtigst muligt. </p>" +
                     "<p class=\"subheading\">CRM Testen er sponsoreret af <a href=\"https://www.speople.dk/ \">sPeople</a></p>" +
                     "</div>";
@@ -54,7 +54,7 @@ namespace Testen_Website.Questions
                 description =
                     "<div>" +
                     "<p>Baseret på dine svar, foreslår vi at du overvejer følgende CRM systemer:</p>" +
-                    "<ol><li>Billig CRM</li> <li>Channel CRM</li> <li>SkyView CRM</li> <li>Proff CRM</li></ol>" +
+                    "<ul><li>Billig CRM</li> <li>Channel CRM</li> <li>SkyView CRM</li> <li>Proff CRM</li></ul>" +
                     "<p>Tak for at du gjorde brug af CRM Testen, og held og lykke med at finde det rette CRM System.</p>" +
                     "<p class=\"subheading\">CRM Testen er sponsoreret af <a href=\"https://www.speople.dk/ \">sPeople</a></p>" +
                     "</div>";
@@ -63,12 +63,15 @@ namespace Testen_Website.Questions
                 
                 description =
                     "<div>" +
-                    "<p>Baseret på dine svar, foreslår vi at du overvejer følgende CRM systemer:</p>" +
-                    "<ol><li><a href\"https://www.salesforce.com/ \">Salesforce</a></li> <li><a href\"https://dynamics.microsoft.com/en-us/ \">Microsoft CRM</a></li> <li><a href\"https://www.360businesstool.com/ \">360 Business Tool</a></li></ol>" +
-                    "<p>Tak for at du gjorde brug af CRM Testen, og held og lykke med at finde det rette CRM System.</p>" +
-                    "<p>Hvis du har spørgsmål, er du velkommen til at <a href\"https://www.360businesstool.com/kontakt/ \">indtaste dine kontaktinformationer her</a>," +
-                    "så vil du blive kontaktet af en CRM specialist hurtigst muligt. </p>" +
-                    "<p class=\"subheading\">CRM Testen er sponsoreret af <a href=\"https://www.speople.dk/ \">sPeople</a></p>" +
+                        "<p>Baseret på dine svar, foreslår vi at du overvejer følgende CRM systemer:</p>" +
+                        "<ol><li><a href=\"https://www.salesforce.com/ \">Salesforce</a>" +
+                            "</li> <li><a href=\"https://dynamics.microsoft.com/en-us/ \">Microsoft CRM</a></li>" +
+                            "<li><a href=\"https://www.360businesstool.com/ \">360 Business Tool</a></li>" +
+                        "</ol>" +
+                        "<p>Tak for at du gjorde brug af CRM Testen, og held og lykke med at finde det rette CRM System.</p>" +
+                        "<p>Hvis du har spørgsmål, er du velkommen til at <a href=\"https://www.360businesstool.com/kontakt/ \">indtaste dine kontaktinformationer her</a>," +
+                        "så vil du blive kontaktet af en CRM specialist hurtigst muligt. </p>" +
+                        "<p class=\"subheading\">CRM Testen er sponsoreret af <a href=\"https://www.speople.dk/ \">sPeople</a></p>" +
                     "</div>";
             }
 
