@@ -5,7 +5,7 @@
         <form id="conclusion" method="post" runat="server">
             <div class="container">
                 <div class="col-md-2"></div>
-                <div class="col-md-8 text-center containerBox">                    
+                <div class="col-md-8 text-center containerBox" style="min-height: 300px">                    
                     <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
                     <asp:Timer ID="ProgressTimer" runat="server" Interval="3500" OnTick="Timer_Click"></asp:Timer>
                     <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
