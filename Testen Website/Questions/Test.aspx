@@ -15,7 +15,7 @@
                                     <h4><%# Item.Value %></h4>
                                     <asp:Repeater DataSource="<%#Item.Answers%>" runat="server" ItemType="Testen_Website.Models.Answer">
                                         <ItemTemplate>
-                                            <%// Parent DataItems light up red but it works, it is an intellisense issue %>
+                                            <%// Parent DataItems light up red but it works, it is because ItemType is Answer %>
                                             <div class="inputPadding">
                                                 <label>
                                                     <input name="quest<%# DataBinder.Eval(((RepeaterItem)Container.Parent.Parent).DataItem, "ID") %>"

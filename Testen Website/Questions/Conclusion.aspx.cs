@@ -79,7 +79,7 @@ namespace Testen_Website.Questions
 
                 if (rec.Equals("360"))
                 {
-                    title = "Vi Foreslår";
+                    title = "Vi foreslår";
 
                     SystemImage.AlternateText = "360 Business Tool";
                     SystemImage.ImageUrl = "~/Content/360logo.png";
