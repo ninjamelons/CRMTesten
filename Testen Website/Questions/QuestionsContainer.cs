@@ -12,15 +12,15 @@ namespace Testen_Website.Questions
         {
             var questions = new List<QuestionRep>();
 
-            questions.Add(new QuestionRep(1, "checkbox", "Hvilke funktioner findes i din virksomhed: (vælg gerne flere)", new List<Answer>()
+            questions.Add(new QuestionRep(1, "checkbox", "Hvilke funktioner findes i din virksomhed: (Vælg gerne flere)", new List<Answer>()
             {
-                new Answer("Vi har møde bookere, der ringer telesalg, telemarketing og/eller mødebooking", "360"),
-                new Answer("Vi har sælgere, der aftaler møder med kunde-emner, og laver tilbud", "360"),
+                new Answer("Vi har mødebookere, der ringer telesalg, telemarketing og/eller mødebooking", "360"),
+                new Answer("Vi har sælgere, der aftaler møder med kunde-emner og laver tilbud", "360"),
                 new Answer("Vi har marketing medarbejdere, der brander og annoncerer vores virksomhed, f.eks. via nyhedsbreve", "360"),
                 new Answer("Vi har service medarbejdere, der håndterer kundespørgsmål, service og kundeklager", "360"),
                 new Answer("Andet / Ved ikke", "360")
             }));
-            questions.Add(new QuestionRep(2, "checkbox", "Hvilke udsagn passer på din virksomhed: (vælg gerne flere)", new List<Answer>()
+            questions.Add(new QuestionRep(2, "checkbox", "Hvilke udsagn passer på din virksomhed: (Vælg gerne flere)", new List<Answer>()
             {
                 new Answer("Vores medarbejdere har behov for at se, hvad andre medarbejdere har planlagt af aktiviteter", "360"),
                 new Answer("Vi har behov for at se hvilke e-mails der er sendt til, og modtaget fra, vores kunder og emner", "360"),
@@ -100,7 +100,7 @@ namespace Testen_Website.Questions
                 new Answer("10", "360"),
                 new Answer("Andet / Ved ikke", "360")
             }));
-            questions.Add(new QuestionRep(10, "checkbox", "Hvad beskæftiger organisationen sig primært med? (vælg gerne flere)", new List<Answer>()
+            questions.Add(new QuestionRep(10, "checkbox", "Hvad beskæftiger organisationen sig primært med? (Vælg gerne flere)", new List<Answer>()
             {
                 new Answer("Salg", "360"),
                 new Answer("IT", "360"),
@@ -110,7 +110,7 @@ namespace Testen_Website.Questions
                 new Answer("Offentlige ydelser", "360"),
                 new Answer("Andet / Ved ikke", "360")
             }));
-            questions.Add(new QuestionRep(11, "checkbox", "Hvilke IT systemer anvender organisationen primært? (vælg gerne flere)", new List<Answer>()
+            questions.Add(new QuestionRep(11, "checkbox", "Hvilke IT systemer anvender organisationen primært? (Vælg gerne flere)", new List<Answer>()
             {
                 new Answer("Microsoft Windows", "360"),
                 new Answer("Office 365", "360"),

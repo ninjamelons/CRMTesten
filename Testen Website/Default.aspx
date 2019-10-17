@@ -16,7 +16,7 @@
                         Ved at besvare 12 simple spørgsmål, får du forslag til hvilke CRM systemer, der er relevante for din virksomhed eller organisation. Jo mere nøjagtigt du besvarer spørgsmålene, jo bedre kan vi vurdere jeres situation.
                     </p>
                     <p>
-                        Det er op til dig, hvordan du vil bruge CRM Testen. Du kan bruge den til at få relevante muligheder at vælge mellem. Men du kan også bruge den til at vurdere, om i overhovedet har behov for et CRM system i jeres organisation.
+                        Det er op til dig, hvordan du vil bruge CRM Testen. Du kan bruge den til at få relevante muligheder at vælge mellem. Men du kan også bruge den til at vurdere, om I overhovedet har behov for et CRM system i jeres organisation.
                     </p>
                     <p>
                         Besvar spørgsmålene og se hvilket CRM-system, der passer til jer. Det tager kun få minutter, og du får svar med det samme.
@@ -26,9 +26,6 @@
                             <a href="Questions/Test.aspx" class="btn btn-primary">Start CRM Testen</a>
                         </div>
                     </div>
-                    <p class="subheading">
-                        CRM Testen er sponsoreret af <a href="http://www.speople.dk/">sPeople</a>
-                    </p>
                 </div>
             </div>
         </div>
