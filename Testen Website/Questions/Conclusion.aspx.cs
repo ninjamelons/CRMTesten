@@ -102,7 +102,11 @@ namespace Testen_Website.Questions
                     description =
                         "<div>" +
                         "<p>Baseret på dine svar, foreslår vi at du overvejer følgende CRM systemer:</p>" +
-                        "<ul><li>Billig CRM</li> <li><a href=\"https://simply-crm.dk/\">Simply CRM</a></li> <li>SkyView CRM</li> <li>Proff CRM</li></ul>" +
+                        "<ul style=\"list-style: none;\"><li><a href=\"http://www.billigcrm.dk/ \">Billig CRM</a></li>" +
+                            "<li><a href=\"https://simply-crm.dk/ \">Simply CRM</a></li>" +
+                            "<li><a href=\"https://skyviewcrm.dk/ \">SkyView CRM</a></li>" +
+                            "<li><a href=\"https://proffcrm.dk/ \">Proff CRM</a></li>" +
+                        "</ul>" +
                         "<p>Tak for at du gjorde brug af CRM Testen, og held og lykke med at finde det rette CRM System.</p>" +
                         "</div>";
                 }
@@ -113,10 +117,10 @@ namespace Testen_Website.Questions
                     description =
                         "<div>" +
                             "<p>Baseret på dine svar, foreslår vi at du overvejer følgende CRM systemer:</p>" +
-                            "<ol><li><a href=\"https://www.salesforce.com/ \">Salesforce</a>" +
+                            "<ul style=\"list-style: none;\"><li><a href=\"https://www.salesforce.com/ \">Salesforce</a>" +
                                 "</li> <li><a href=\"https://dynamics.microsoft.com/en-us/ \">Microsoft CRM</a></li>" +
                                 "<li><a href=\"https://www.360businesstool.com/ \">360 Business Tool</a></li>" +
-                            "</ol>" +
+                            "</ul>" +
                             "<p>Tak for at du gjorde brug af CRM Testen, og held og lykke med at finde det rette CRM System.</p>" +
                             "<p>Hvis du har spørgsmål, er du velkommen til at <a href=\"https://www.360businesstool.com/kontakt/ \">indtaste dine kontaktinformationer her</a>," +
                             "så vil du blive kontaktet af en CRM specialist hurtigst muligt. </p>" +
